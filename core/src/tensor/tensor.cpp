@@ -42,13 +42,18 @@ const std::vector<int>& neurolens::Tensor::shape() const{
     return m_shape;
 }
 
+
+
 int neurolens::Tensor::rank() const{
     return static_cast<std::size_t>(m_shape.size());
 }
 
+
 std::size_t neurolens::Tensor::size()const {
     return m_data.size();
 }
+
+
 int neurolens::Tensor::dim(int axis)const{
     if(axis >= rank()){
         throw std::invalid_argument("axis out of range");
@@ -56,10 +61,13 @@ int neurolens::Tensor::dim(int axis)const{
     return m_shape[axis];
 }
 
+
+
 // it will return first element from vector 
 float* neurolens::Tensor::data(){
     return  m_data.data();
   };
+
 
 
 const float* neurolens::Tensor::data() const {
@@ -67,9 +75,11 @@ const float* neurolens::Tensor::data() const {
   };
 
 
+
 std::vector<float>& neurolens::Tensor::values(){
     return m_data;
 };
+
 
 const std::vector<float>& neurolens::Tensor::values() const{
 return m_data;
