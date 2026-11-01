@@ -28,14 +28,16 @@ neurolens::Tensor::Tensor(std::vector<int> shape, std::vector<float> values)
 
 neurolens::Tensor::Tensor(std::vector<int>shape):
 m_shape(std::move(shape)),
-m_data(numel(shape)){};
+m_data(numel(m_shape)){}      
 
-neurolens::Tensor zeros(std::vector<int> shape){
+neurolens::Tensor neurolens::Tensor::zeros(std::vector<int> shape){
     return neurolens::Tensor(std::move(shape));
 }
 
-neurolens::Tensor full(std::vector<int>shape, std::vector<float>v){
-    return neurolens::Tensor(std::move(shape) , std::move(v));
+neurolens::Tensor neurolens::Tensor::full(std::vector<int> shape, float v){
+    Tensor t(std::move(shape));
+    t.fill(v);
+    return t;
 }
 
 const std::vector<int>& neurolens::Tensor::shape() const{
@@ -45,7 +47,7 @@ const std::vector<int>& neurolens::Tensor::shape() const{
 
 
 int neurolens::Tensor::rank() const{
-    return static_cast<std::size_t>(m_shape.size());
+    return static_cast<int>(m_shape.size());
 }
 
 
@@ -55,7 +57,7 @@ std::size_t neurolens::Tensor::size()const {
 
 
 int neurolens::Tensor::dim(int axis)const{
-    if(axis >= rank()){
+    if(axis < 0 || axis >= rank()){
         throw std::invalid_argument("axis out of range");
     }
     return m_shape[axis];
@@ -124,4 +126,26 @@ std::string neurolens::Tensor::shape_str() const
     }
     s += ")";
     return s;
+}
+
+float& neurolens::Tensor::at(int i, int j)
+{
+     if (rank() != 2)
+        throw std::invalid_argument("Tensor::at(i, j) needs a 2-D tensor");
+
+     if (i < 0 || i >= dim(0) || j < 0 || j >= dim(1))
+        throw std::out_of_range("Tensor::at: index out of range");
+
+     return m_data[static_cast<std::size_t>(i) * dim(1) + j];
+}
+
+const float& neurolens::Tensor::at(int i, int j) const
+{
+    if (rank() != 2)
+        throw std::invalid_argument("Tensor::at(i, j) needs a 2-D tensor");
+
+    if (i < 0 || i >= dim(0) || j < 0 || j >= dim(1))
+        throw std::out_of_range("Tensor::at: index out of range");
+
+    return m_data[static_cast<std::size_t>(i) * dim(1) + j];
 }

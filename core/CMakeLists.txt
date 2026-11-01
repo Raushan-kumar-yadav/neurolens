@@ -1,7 +1,9 @@
-# neurolens_core: pure C++20, no Qt.
+# neurolens_core: pure C++20
 add_library(neurolens_core STATIC
     src/data/linear.cpp
     src/data/spiral.cpp
+    src/tensor/tensor.cpp
+    src/tensor/ops.cpp
 )
 add_library(neurolens::core ALIAS neurolens_core)
 

@@ -10,6 +10,9 @@ option(NEUROLENS_BUILD_VIEWER "Build the Qt viewer" ON)
 # core: pure C++, no Qt
 add_subdirectory(core)
 
+enable_testing()
+add_subdirectory(tests)
+
 if(NEUROLENS_BUILD_VIEWER)
     set(CMAKE_AUTOMOC ON)
     set(CMAKE_AUTORCC ON)

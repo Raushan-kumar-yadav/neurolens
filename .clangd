@@ -1,2 +1,7 @@
 CompileFlags:
   CompilationDatabase: build
+  
+InlayHints:
+  ParameterNames: No      # the "duration:" style hints
+  DeducedTypes: No        # the "shared_ptr<...> =" style hints
+  Designators: No         # the ".x =" hints in initializers

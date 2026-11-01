@@ -12,7 +12,7 @@ class Tensor{
     Tensor(std::vector<int>shape , std::vector<float>value);
     explicit Tensor(std::vector<int>shape);
     static Tensor zeros(std::vector<int> shape);
-    static Tensor full(std::vector<int>shape, std::vector<float>v);
+    static Tensor full(std::vector<int> shape, float v);
 
 
 
