@@ -20,9 +20,21 @@ class Tanh{
     neurolens::Tensor forward(const neurolens::Tensor& x);
 
     private:
-
-    Tensor m_input;
+ 
     Tensor m_output;
 };
+
+class Sigmoid{
+    public:
+    Sigmoid() = default;
+
+    neurolens::Tensor forward(const neurolens::Tensor& x);
+
+    private:
+
+     
+    Tensor m_output;
+};
+
 
 }

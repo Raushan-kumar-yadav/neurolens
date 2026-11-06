@@ -22,11 +22,27 @@ neurolens::Tensor neurolens::ReLU::forward(const neurolens::Tensor& x){
 // tanh(x[i])
 neurolens::Tensor neurolens::Tanh::forward(const neurolens::Tensor& x){
 
-    m_input = x;
+   
     Tensor c(x.shape());
 
     for(size_t i = 0 ; i < x.size()  ; ++i){
         c[i] = std::tanh(x[i]);
+    }
+    m_output = c;
+    return c;
+};
+
+
+
+
+// 1/1 + e^-x
+neurolens::Tensor neurolens::Sigmoid::forward(const neurolens::Tensor& x){
+
+    
+    Tensor c(x.shape());
+
+    for(size_t i = 0 ; i < x.size()  ; ++i){
+        c[i] = 1.0f / (1.0f + std::exp(-x[i]));
     }
     m_output = c;
     return c;
