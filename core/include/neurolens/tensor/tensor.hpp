@@ -8,7 +8,8 @@ namespace neurolens {
 class Tensor{
     public:
 
-    Tensor(){};
+ 
+    Tensor() = default;
     Tensor(std::vector<int>shape , std::vector<float>value);
     explicit Tensor(std::vector<int>shape);
     static Tensor zeros(std::vector<int> shape);
