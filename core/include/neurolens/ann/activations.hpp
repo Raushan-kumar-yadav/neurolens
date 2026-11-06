@@ -9,6 +9,20 @@ class ReLU {
     neurolens::Tensor forward(const neurolens::Tensor& x);
 
     private:
+    Tensor m_input;
+};
+
+
+class Tanh{
+    public:
+    Tanh() = default;
+
+    neurolens::Tensor forward(const neurolens::Tensor& x);
+
+    private:
 
     Tensor m_input;
-};}
+    Tensor m_output;
+};
+
+}
