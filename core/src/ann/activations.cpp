@@ -13,13 +13,13 @@ neurolens::Tensor neurolens::ReLU::forward(const neurolens::Tensor& x){
     Tensor c(x.shape());
 
     for(size_t i = 0 ; i < x.size()  ; ++i){
-        c[i] = std::max<size_t>(0,x[i]);
+        c[i] = std::max(0.0f,x[i]);
     }
     return c;
 };
 
 
-// 
+// tanh(x[i])
 neurolens::Tensor neurolens::Tanh::forward(const neurolens::Tensor& x){
 
     m_input = x;
