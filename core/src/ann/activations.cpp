@@ -49,8 +49,33 @@ neurolens::Tensor neurolens::Sigmoid::forward(const neurolens::Tensor& x){
     return c;
 };  
 
-neurolens::Tensor neurolens::Sigmoid::backward(const Tensor& grad_output){
+// Backward pass uses cached m_output (y)
+neurolens::Tensor neurolens::Sigmoid::backward(const Tensor& grad_out) {
+    Tensor grad_in(grad_out.shape());
+    for (std::size_t i = 0; i < grad_out.size(); ++i) {
+        float y = m_output[i];                      
+        float local_deriv = y * (1.0f - y); // dy/dx = y * (1 - y)
+        grad_in[i] = grad_out[i] * local_deriv; // Chain rule: dL/dy * dy/dx
+    }
+    return grad_in;
+}
 
-    
-     
-};
+// Backward pass uses cached m_output (y)
+neurolens::Tensor neurolens::Tanh::backward(const Tensor& grad_out) {
+    Tensor grad_in(grad_out.shape());
+    for (std::size_t i = 0; i < grad_out.size(); ++i) {
+        float y = m_output[i];                      
+        float local_deriv =   // dy/dx = 1.0f - y*y
+        grad_in[i] = grad_out[i] * local_deriv; // Chain rule: dL/dy * dy/dx
+    }
+    return grad_in;
+}
+
+neurolens::Tensor neurolens::ReLU::backward(const Tensor& grad_out) {
+    Tensor grad_in(grad_out.shape());
+    for (std::size_t i = 0; i < grad_out.size(); ++i) {
+        float y = m_input[i];                      
+        grad_in[i] = (m_input[i] > 0.0f) ? grad_out[i] : 0.0f;
+    }
+    return grad_in;
+}
