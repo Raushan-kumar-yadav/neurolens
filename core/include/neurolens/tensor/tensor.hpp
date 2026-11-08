@@ -47,6 +47,9 @@ class Tensor{
     bool sameShape(const Tensor& other) const ;
     std::string shape_str() const;
 
+    // tensor methods 
+
+    Tensor transpose() const ;
     private:
 
     // store 

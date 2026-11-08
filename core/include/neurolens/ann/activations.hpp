@@ -7,6 +7,7 @@ class ReLU {
         ReLU() = default;
 
     neurolens::Tensor forward(const neurolens::Tensor& x);
+    neurolens::Tensor backward(const Tensor& grad_output);
 
     private:
     Tensor m_input;
@@ -18,21 +19,21 @@ class Tanh{
     Tanh() = default;
 
     neurolens::Tensor forward(const neurolens::Tensor& x);
+    neurolens::Tensor backward(const Tensor& grad_output);
 
     private:
- 
     Tensor m_output;
 };
 
 class Sigmoid{
+
     public:
     Sigmoid() = default;
 
     neurolens::Tensor forward(const neurolens::Tensor& x);
+    neurolens::Tensor backward(const Tensor& grad_output);
 
     private:
-
-     
     Tensor m_output;
 };
 

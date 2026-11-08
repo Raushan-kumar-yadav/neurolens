@@ -11,6 +11,7 @@ class Liner{
 
     // forward pass method its will handle calculation 
     Tensor forward(const Tensor& x);
+    Tensor backward(const Tensor& grad_output);
 
     Tensor& weight();
     const Tensor& weight() const;
@@ -25,6 +26,9 @@ class Liner{
     Tensor m_weights; // (in, out)
     Tensor m_bias; // (1, out)
     Tensor m_input; // copy of the last x 
+
+    Tensor m_grad_weights;
+    Tensor m_grad_bias;
 };
 
 } // namespace

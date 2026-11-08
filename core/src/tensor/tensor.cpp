@@ -44,6 +44,28 @@ const std::vector<int>& neurolens::Tensor::shape() const{
     return m_shape;
 }
 
+ neurolens::Tensor neurolens::Tensor::transpose() const{
+
+    if (m_shape.size() != 2) {
+        throw std::invalid_argument("transpose() currently supports 2D tensors only.");
+    }
+
+    std::size_t rows = m_shape[0];
+    std::size_t cols = m_shape[1];
+
+    Tensor result({static_cast<int>(cols),static_cast<int>(rows)});
+
+    for (std::size_t r = 0; r < rows; ++r) {
+        for (std::size_t c = 0; c < cols; ++c) {
+            // Element at (r, c)   to (c, r)  
+            result[c * rows + r] = m_data[r * cols + c];
+        }
+    }
+
+    return result;
+
+
+ } ;
 
 
 int neurolens::Tensor::rank() const{

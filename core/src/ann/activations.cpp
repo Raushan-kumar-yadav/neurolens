@@ -19,6 +19,7 @@ neurolens::Tensor neurolens::ReLU::forward(const neurolens::Tensor& x){
 };
 
 
+
 // tanh(x[i])
 neurolens::Tensor neurolens::Tanh::forward(const neurolens::Tensor& x){
 
@@ -28,10 +29,10 @@ neurolens::Tensor neurolens::Tanh::forward(const neurolens::Tensor& x){
     for(size_t i = 0 ; i < x.size()  ; ++i){
         c[i] = std::tanh(x[i]);
     }
+
     m_output = c;
     return c;
 };
-
 
 
 
@@ -46,4 +47,10 @@ neurolens::Tensor neurolens::Sigmoid::forward(const neurolens::Tensor& x){
     }
     m_output = c;
     return c;
+};  
+
+neurolens::Tensor neurolens::Sigmoid::backward(const Tensor& grad_output){
+
+    
+     
 };
