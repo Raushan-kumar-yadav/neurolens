@@ -74,7 +74,7 @@ neurolens::Tensor neurolens::Tanh::backward(const Tensor& grad_out) {
 neurolens::Tensor neurolens::ReLU::backward(const Tensor& grad_out) {
     Tensor grad_in(grad_out.shape());
     for (std::size_t i = 0; i < grad_out.size(); ++i) {
-        float y = m_input[i];                      
+                             
         grad_in[i] = (m_input[i] > 0.0f) ? grad_out[i] : 0.0f;
     }
     return grad_in;

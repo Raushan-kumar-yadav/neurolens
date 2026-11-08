@@ -29,6 +29,7 @@ class Liner{
 
     Tensor m_grad_weights;
     Tensor m_grad_bias;
+    
 };
 
 } // namespace

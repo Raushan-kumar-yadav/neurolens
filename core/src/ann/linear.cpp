@@ -52,3 +52,28 @@ const neurolens::Tensor& neurolens::Liner::bias()const {
     return y;
 
  };
+
+ 
+// formulas ( x*w + bias)
+neurolens::Tensor neurolens::Liner::backward(const Tensor& grad_output) {
+
+ 
+    m_grad_weights = neurolens::matmul(m_input.transpose(), grad_output);
+
+    // Bias gradient 
+    std::size_t rows = grad_output.shape()[0];
+    std::size_t cols = grad_output.shape()[1];
+
+    m_grad_bias = Tensor({1, static_cast<int>(cols)});
+
+    for (std::size_t r = 0; r < rows; ++r) {
+        for (std::size_t c = 0; c < cols; ++c) {
+            m_grad_bias[c] += grad_output[r * cols + c];
+        }
+    }
+
+    // Input gradient to pass to the previous layer 
+    Tensor grad_in = neurolens::matmul(grad_output, m_weights.transpose());
+
+    return grad_in;
+}
