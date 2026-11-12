@@ -74,6 +74,17 @@ neurolens::Tensor neurolens::Liner::backward(const Tensor& grad_output) {
 
     // Input gradient to pass to the previous layer 
     Tensor grad_in = neurolens::matmul(grad_output, m_weights.transpose());
-
     return grad_in;
+}
+
+void neurolens::Liner::step(float lr) {
+    // Update weights: W = W - lr * dL/dW
+    for (std::size_t i = 0; i < m_weights.size(); ++i) {
+        m_weights[i] -= lr * m_grad_weights[i];
+    }
+
+    //  Update biases: b = b - lr * dL/db
+    for (std::size_t i = 0; i < m_bias.size(); ++i) {
+        m_bias[i] -= lr * m_grad_bias[i];
+    }
 }

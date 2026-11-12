@@ -13,6 +13,10 @@ class Liner{
     Tensor forward(const Tensor& x);
     Tensor backward(const Tensor& grad_output);
 
+    // optimizer steps 
+
+    void step(float lr);
+    
     Tensor& weight();
     const Tensor& weight() const;
 
