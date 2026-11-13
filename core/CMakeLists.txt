@@ -4,6 +4,7 @@ add_library(neurolens_core STATIC
     src/data/spiral.cpp
     src/tensor/tensor.cpp
     src/tensor/ops.cpp
+    main.cpp
 )
 add_library(neurolens::core ALIAS neurolens_core)
 
