@@ -14,11 +14,15 @@ float neurolens::MSELoss::forward(const Tensor& pred, const Tensor& target) {
     float sum = 0.0f;
     for (std::size_t i = 0; i < pred.size(); ++i) {
         float diff = pred[i] - target[i];
+
+        // sum of all difference
         sum += diff * diff;
     }
 
+    // finding means
     return sum / static_cast<float>(pred.size());
 }
+
 
 neurolens::Tensor neurolens::MSELoss::backward() {
     Tensor grad_out(m_pred.shape());
