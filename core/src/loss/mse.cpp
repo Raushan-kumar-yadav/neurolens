@@ -1,4 +1,4 @@
-#include "../include/neurolens/loss/mse.hpp"
+#include <neurolens/loss/mse.hpp>
 
 
 #include <stdexcept>

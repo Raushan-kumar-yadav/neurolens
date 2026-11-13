@@ -1,5 +1,5 @@
-#include "../include/neurolens/ann/activations.hpp"
-#include "neurolens/tensor/tensor.hpp"
+#include <neurolens/ann/activations.hpp>
+#include <neurolens/tensor/tensor.hpp>
 #include <algorithm>
 #include <cmath>
 #include <cstddef>
@@ -65,7 +65,7 @@ neurolens::Tensor neurolens::Tanh::backward(const Tensor& grad_out) {
     Tensor grad_in(grad_out.shape());
     for (std::size_t i = 0; i < grad_out.size(); ++i) {
         float y = m_output[i];                      
-        float local_deriv =   // dy/dx = 1.0f - y*y
+        float local_deriv = 1.0f - y * y; // dy/dx = 1 - y^2
         grad_in[i] = grad_out[i] * local_deriv; // Chain rule: dL/dy * dy/dx
     }
     return grad_in;

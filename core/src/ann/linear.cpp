@@ -1,15 +1,15 @@
-#include "../include/neurolens/ann/linear.hpp"
-#include "neurolens/tensor/ops.hpp"
-#include "neurolens/tensor/tensor.hpp"
+#include <neurolens/ann/linear.hpp>
+#include <neurolens/tensor/ops.hpp>
+#include <neurolens/tensor/tensor.hpp>
 #include <cmath>
 #include <random>
 #include <stdexcept>
 
 
-neurolens::Liner::Liner(int in , int out , std::uint32_t seed ) : m_in(in) , m_out(out),m_weights({in , out}),m_bias({1 , out }),m_input({1, in}){
+neurolens::Linear::Linear(int in , int out , std::uint32_t seed ) : m_in(in) , m_out(out),m_weights({in , out}),m_bias({1 , out }),m_input({1, in}){
 
     if(in <= 0 || out <=0){
-        throw std::invalid_argument("Liner: 'in' and 'out' dimensions must be > 0");
+        throw std::invalid_argument("Linear: 'in' and 'out' dimensions must be > 0");
     }
 
     std::mt19937 rng(seed);
@@ -22,27 +22,27 @@ neurolens::Liner::Liner(int in , int out , std::uint32_t seed ) : m_in(in) , m_o
   
 };
 
-neurolens::Tensor& neurolens::Liner::weight(){
+neurolens::Tensor& neurolens::Linear::weight(){
     return m_weights;
 };
 
 
-const neurolens::Tensor& neurolens::Liner::weight() const {
+const neurolens::Tensor& neurolens::Linear::weight() const {
     return m_weights;
 };
 
-neurolens::Tensor& neurolens::Liner::bias(){
+neurolens::Tensor& neurolens::Linear::bias(){
     return m_bias;
 };
 
 
-const neurolens::Tensor& neurolens::Liner::bias()const {
+const neurolens::Tensor& neurolens::Linear::bias()const {
     return m_bias;
 };
 
 
 // formulas (x*w + x*w + bias)
- neurolens::Tensor neurolens::Liner::forward(const Tensor& x){
+ neurolens::Tensor neurolens::Linear::forward(const Tensor& x){
 
     m_input = x; // Cache input eg: previos layer output
 
@@ -55,7 +55,7 @@ const neurolens::Tensor& neurolens::Liner::bias()const {
 
  
 // formulas ( x*w + bias)
-neurolens::Tensor neurolens::Liner::backward(const Tensor& grad_output) {
+neurolens::Tensor neurolens::Linear::backward(const Tensor& grad_output) {
 
  
     m_grad_weights = neurolens::matmul(m_input.transpose(), grad_output);
@@ -77,7 +77,7 @@ neurolens::Tensor neurolens::Liner::backward(const Tensor& grad_output) {
     return grad_in;
 }
 
-void neurolens::Liner::step(float lr) {
+void neurolens::Linear::step(float lr) {
     // Update weights: W = W - lr * dL/dW
     for (std::size_t i = 0; i < m_weights.size(); ++i) {
         m_weights[i] -= lr * m_grad_weights[i];

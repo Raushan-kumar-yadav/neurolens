@@ -1,5 +1,5 @@
 #pragma once 
-#include "../include/neurolens/tensor/tensor.hpp"
+#include <neurolens/tensor/tensor.hpp>
 
 namespace neurolens { 
 class ReLU {

@@ -1,6 +1,6 @@
 #pragma once 
-#include "../include/neurolens/tensor/ops.hpp"
-#include "neurolens/tensor/tensor.hpp"
+#include <neurolens/tensor/ops.hpp>
+#include <neurolens/tensor/tensor.hpp>
 #include <cstddef>
 #include <stdexcept>
 

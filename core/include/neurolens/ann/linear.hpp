@@ -1,13 +1,13 @@
 #pragma once 
-#include "cstdint"
-#include "../include/neurolens/tensor/tensor.hpp"
+#include <cstdint>
+#include <neurolens/tensor/tensor.hpp>
 
 namespace neurolens {
-class Liner{
+class Linear{
 
     public:
     // in = numer of intput features , out = number of output features 
-    Liner(int in , int out , std::uint32_t seed = 32);
+    Linear(int in , int out , std::uint32_t seed = 32);
 
     // forward pass method its will handle calculation 
     Tensor forward(const Tensor& x);

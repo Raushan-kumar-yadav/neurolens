@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "neurolens/tensor/tensor.hpp"
+#include <neurolens/tensor/tensor.hpp>
 
 // Tensor opration here 
 namespace neurolens {

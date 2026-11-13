@@ -1,8 +1,8 @@
 #include <iostream>
-#include "include/neurolens/tensor/tensor.hpp"
-#include "include/neurolens/ann/linear.hpp"
-#include "include/neurolens/ann/activations.hpp"
-#include "include/neurolens/loss/mse.hpp"
+#include <neurolens/tensor/tensor.hpp>
+#include <neurolens/ann/linear.hpp>
+#include <neurolens/ann/activations.hpp>
+#include <neurolens/loss/mse.hpp>
  
 int main() {
     using namespace neurolens;
@@ -24,9 +24,9 @@ int main() {
     });
 
     // Build Network: 2 -> 4 (Tanh) -> 1
-    Liner layer1(2, 4);
+    Linear layer1(2, 4);
     Tanh act1;
-    Liner layer2(4, 1);
+    Linear layer2(4, 1);
     MSELoss mse;
 
     float lr = 0.1f;
