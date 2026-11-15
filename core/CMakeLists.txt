@@ -7,6 +7,7 @@ add_library(neurolens_core STATIC
     src/ann/linear.cpp
     src/ann/activations.cpp
     src/loss/mse.cpp
+    src/module.hpp
 )
 add_library(neurolens::core ALIAS neurolens_core)
 

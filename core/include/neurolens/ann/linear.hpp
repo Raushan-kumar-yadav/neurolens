@@ -1,21 +1,23 @@
 #pragma once 
 #include <cstdint>
 #include <neurolens/tensor/tensor.hpp>
+#include "../include/neurolens/module.hpp"
+
 
 namespace neurolens {
-class Linear{
+class Linear : public Module{
 
     public:
     // in = numer of intput features , out = number of output features 
     Linear(int in , int out , std::uint32_t seed = 32);
 
     // forward pass method its will handle calculation 
-    Tensor forward(const Tensor& x);
-    Tensor backward(const Tensor& grad_output);
+    Tensor forward(const Tensor& x) override;
+    Tensor backward(const Tensor& grad_output) override;
 
     // optimizer steps 
 
-    void step(float lr);
+    void step(float lr) override;
     
     Tensor& weight();
     const Tensor& weight() const;
