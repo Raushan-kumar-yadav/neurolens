@@ -88,3 +88,11 @@ void neurolens::Linear::step(float lr) {
         m_bias[i] -= lr * m_grad_bias[i];
     }
 }
+
+const neurolens::Tensor& neurolens::Linear::grad_weight() const {
+    return m_grad_weights;
+}
+
+const neurolens::Tensor& neurolens::Linear::grad_bias() const {
+    return m_grad_bias;
+}

@@ -1,6 +1,6 @@
 #pragma once 
 #include <neurolens/tensor/tensor.hpp>
-#include "../include/neurolens/module.hpp"
+#include <neurolens/module.hpp>
 
 namespace neurolens { 
 class ReLU :  public Module {

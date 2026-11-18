@@ -1,7 +1,7 @@
 #pragma once 
 #include <cstdint>
 #include <neurolens/tensor/tensor.hpp>
-#include "../include/neurolens/module.hpp"
+#include <neurolens/module.hpp>
 
 
 namespace neurolens {
@@ -24,6 +24,10 @@ class Linear : public Module{
 
     Tensor& bias();
     const Tensor& bias() const ;
+
+    // gradients from the last backward() call (read-only, used by tests and optimizers)
+    const Tensor& grad_weight() const;
+    const Tensor& grad_bias() const;
 
 
     private:  // datas 

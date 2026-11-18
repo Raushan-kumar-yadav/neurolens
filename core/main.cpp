@@ -30,7 +30,7 @@ int main() {
     MSELoss mse;
 
     float lr = 0.1f;
-    int epochs = 2000;
+    int epochs = 2000;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 
     // Training Loop
     for (int epoch = 0; epoch < epochs; ++epoch) {

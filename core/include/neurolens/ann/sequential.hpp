@@ -1,5 +1,5 @@
 #pragma once 
-#include "../include/neurolens/module.hpp"
+#include <neurolens/module.hpp>
 #include <memory>
 #include <utility>
 #include <vector>
