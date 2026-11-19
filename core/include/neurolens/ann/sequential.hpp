@@ -1,53 +1,34 @@
-#pragma once 
+#pragma once
 #include <neurolens/module.hpp>
 #include <memory>
 #include <utility>
 #include <vector>
 
-
 namespace neurolens {
 
-
-class Sequential : public Module{
-
+// A list of modules run one after another.
+class Sequential : public Module {
 public:
-
-    // create directly
-    template<typename LayerType , typename... Args>
-    void add(Args&&... args){
+    
+    template <typename LayerType, typename... Args>
+    void add(Args&&... args) {
         m_layers.push_back(std::make_unique<LayerType>(std::forward<Args>(args)...));
     }
-    // pass it as ptr
-    void add(std::unique_ptr<Module> layer) {
-        m_layers.push_back(std::move(layer));
-    }
 
-    // run fwd of all layers 
-    Tensor forward(const Tensor& x) override {
-        Tensor current = x;
-        for (auto& layer : m_layers) {
-            current = layer->forward(current);
-        }
-        return current;
-    }
+    // add a layer you already created
+    void add(std::unique_ptr<Module> layer);
 
-    // run backward for all layers 
-    Tensor backward(const Tensor& grad_output) override {
-        Tensor current_grad = grad_output;
-        for (auto it = m_layers.rbegin(); it != m_layers.rend(); ++it) {
-            current_grad = (*it)->backward(current_grad);
-        }
-        return current_grad;
-    }
+    // run forward through all layers, in order
+    Tensor forward(const Tensor& x) override;
 
-    // run steps calc for all layers 
-    void step(float lr) override {
-        for (auto& layer : m_layers) {
-            layer->step(lr);
-        }
-    }
+    // run backward through all layers, in reverse order
+    Tensor backward(const Tensor& grad_output) override;
+
+    // update every layer
+    void step(float lr) override;
 
 private:
-std::vector<std::unique_ptr<Module>> m_layers;
+    std::vector<std::unique_ptr<Module>> m_layers;
+};
 
-};}
+}  // namespace neurolens
